@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Active - Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { width: 100%; max-width: 480px; background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 24px; }
+        .status-header { text-align: center; margin-bottom: 20px; }
+        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(46, 160, 67, 0.15); border: 1px solid rgba(46, 160, 67, 0.4); color: #3fb950; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 12px; }
+        .status-dot { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; }
+        .title { font-size: 20px; font-weight: 700; color: #f0f6fc; }
+        .subtitle { font-size: 13px; color: #8b949e; margin-top: 6px; }
+        .card { background: #0d1117; border: 1px solid #21262d; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .card-title { font-size: 13px; font-weight: 600; color: #8b949e; margin-bottom: 12px; }
+        .device-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #21262d; font-size: 13px; }
+        .device-item:last-child { border-bottom: none; }
+        .device-item .label { color: #8b949e; }
+        .device-item .value { font-weight: 500; color: #c9d1d9; word-break: break-all; text-align: right; }
+        .info-box { background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 12px; color: #eab308; line-height: 1.5; }
+        .info-box ul { margin-left: 16px; margin-top: 4px; }
+        .community-box { background: rgba(56, 139, 253, 0.1); border: 1px solid rgba(56, 139, 253, 0.3); border-radius: 10px; padding: 12px; margin-bottom: 20px; font-size: 12px; color: #58a6ff; line-height: 1.5; }
+        .actions { display: flex; flex-direction: column; gap: 12px; }
+        .btn { width: 100%; padding: 14px; border: 1px solid #30363d; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; color: #fff; background: #21262d; text-decoration: none; }
+        .btn:hover { background: #30363d; }
+        .btn-tg { background: #0088cc; border-color: #0088cc; }
+        .btn-tg:hover { background: #0077b3; }
+        .btn-wa { background: #25d366; border-color: #25d366; color: #0d1117; }
+        .btn-wa:hover { background: #20bd5a; }
+        .btn-start { background: #238636; border-color: #238636; margin-top: 8px; }
+        .btn-start:hover { background: #2ea043; }
+        .msg-box { text-align: center; font-size: 13px; margin-top: 12px; padding: 10px; border-radius: 8px; display: none; }
+        .msg-box.success { display: block; background: rgba(46, 160, 67, 0.1); border: 1px solid rgba(46, 160, 67, 0.3); color: #3fb950; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="status-header">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>PROXY SERVER ONLINE</span>
+            </div>
+            <div class="title">Proxy Access Portal</div>
+            <div class="subtitle">Your proxy connection is ready to use immediately.</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">DEVICE INFORMATION</div>
+            <div class="device-item"><span class="label">IP Address</span><span class="value" id="deviceIp">-</span></div>
+            <div class="device-item"><span class="label">Device</span><span class="value" id="deviceName">-</span></div>
+            <div class="device-item"><span class="label">Platform</span><span class="value" id="devicePlatform">-</span></div>
+            <div class="device-item"><span class="label">Browser</span><span class="value" id="deviceUa">-</span></div>
+        </div>
+
+        <div class="info-box">
+            <strong>Update V4 Features:</strong>
+            <ul>
+                <li>Speed Run</li>
+                <li>Body Headshot</li>
+                <li>High Sensitivity</li>
+            </ul>
+            <div style="margin-top: 8px; color: #f87171;">
+                <strong>DISCLAIMER:</strong> Using a primary account is strongly discouraged. All risks regarding account bans or penalties are solely the user's responsibility.
+            </div>
+        </div>
+
+        <div class="community-box">
+            <strong>Join Our Channels:</strong>
+            <div style="margin-top: 4px;">
+                Joining our official channels gives you faster update announcements and shows respect for our development work.
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="https://t.me/junofficial354ch2" target="_blank" class="btn btn-tg">
+                <span>Join Telegram Channel</span>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbBnIVuCMY0POm5gqO1P" target="_blank" class="btn btn-wa">
+                <span>Join WhatsApp Channel</span>
+            </a>
+            <a href="/localconfig.json" download="localconfig.json" class="btn btn-start">
+                <span>DOWNLOAD FILES</span>
+            </a>
+        </div>
+
+        <div id="msgBox" class="msg-box"></div>
+    </div>
+
+    <script>
+        async function fetchDeviceInfo() {
+            try {
+                const res = await fetch('/api/device');
+                const data = await res.json();
+                document.getElementById('deviceIp').textContent = data.ip || '127.0.0.1';
+                document.getElementById('deviceName').textContent = data.device || 'Android';
+                document.getElementById('devicePlatform').textContent = data.platform || 'Linux armv8l';
+                document.getElementById('deviceUa').textContent = data.userAgent || navigator.userAgent;
+            } catch (e) {
+                document.getElementById('deviceIp').textContent = '127.0.0.1';
+                document.getElementById('deviceName').textContent = navigator.platform;
+                document.getElementById('devicePlatform').textContent = navigator.userAgentData ? navigator.userAgentData.platform : 'Mobile';
+                document.getElementById('deviceUa').textContent = navigator.userAgent;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchDeviceInfo);
+    </script>
+</body>
+</html>
